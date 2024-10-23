@@ -1,5 +1,5 @@
 {
-  description = "LinkServer builder";
+  description = "LinkServer derivation builder";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs = inputs @ {self, ...}: let
@@ -13,5 +13,9 @@
       version,
     }:
       pkgs.callPackage ./linkserver.nix {inherit makeselfBinFile version;};
+    defaultTemplate = {
+      path = ./template;
+      description = "Flake based nix package with placeholders";
+    };
   };
 }

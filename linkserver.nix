@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
     cp -r $WORK_DIR/lib $out && \
     cp -r $WORK_DIR/usr $out && \
     echo "#!/usr/bin/env bash" >> $out/bin/${pname} && \
-    echo "PATH=${pkgs.usbutils}/bin:$PATH" >> $out/bin/${pname} && \
+    echo "PATH=${pkgs.usbutils}/bin:\$PATH" >> $out/bin/${pname} && \
     echo "exec $out/usr/local/LinkServer_${version}/LinkServer \$@" >> $out/bin/${pname} && \
     chmod 755 $out/bin/${pname}
   '';

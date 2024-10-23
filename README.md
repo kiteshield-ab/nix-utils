@@ -3,7 +3,7 @@
 # External dependencies
 - External 'Makeself' binary from the NXP website.
 
-## How to use
+## How to use (system wide with udev rules)
 1. Add an input to your system flake
 
 ```nix
@@ -36,3 +36,15 @@ in
   environment.systemPackages = [linkServerDerivation];
 }
 ```
+
+## How to use (from template)
+
+Run
+```sh
+$ nix flake new <path> -t github:kiteshield-ab/linkserver-nix
+```
+and fix variables marked with `FIX THIS` comment.
+
+Now you can run `nix shell` or `nix run` and have linkserver available.
+
+Note: this approach does not take care of udev rules. MCU-Link works though if one uses eg. https://github.com/jneem/probe-rs-rules
