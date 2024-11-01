@@ -39,6 +39,7 @@ stdenv.mkDerivation rec {
     bsdtar -x -f $WORK_DIR/data.tar.gz -C $WORK_DIR && \
     mkdir -p $out/bin && \
     cp -r $WORK_DIR/opt $out && \
+    rm -rf ${binNxpPrefix}/bin/jre && \
     cp -r $WORK_DIR/usr $out && \
     makeWrapper ${binNxpPrefix}/bin/tools $out/bin/${pname} \
       --prefix LD_LIBRARY_PATH : ${
