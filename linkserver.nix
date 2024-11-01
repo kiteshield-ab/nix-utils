@@ -2,60 +2,57 @@
   lib,
   pkgs,
   stdenv,
-  makeselfBinFile,
-  version,
+  requireFile,
+  ...
 }:
+let
+  filename = "LinkServer_${version}.x86_64.deb";
+  version = "24.9.75";
+in
 stdenv.mkDerivation rec {
   pname = "linkserver";
   inherit version;
-  src = ./.;
+  dontUnpack = true;
+  src = requireFile {
+    url = "https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/linkserver-for-microcontrollers:LINKERSERVER";
+    name = "${filename}.bin";
+    sha256 = "173jjmxv6p45n4484v3r6f93jjsmr840h179pwrffjfbxgpkyiph";
+  };
   nativeBuildInputs = with pkgs; [
+    makeWrapper
     libarchive
   ];
-  buildInputs = with pkgs; [
-    # Q: does it have to be repeated? Not sure what is enough when defining dependencies
-    usbutils # `lsusb` command
-    systemd
-    libusb1
-    libz
-    stdenv.cc.cc.lib
-  ];
-  # Q: is there some built-in way to create wrapper scripts that puts deps in path?
+  # Q: I guess `buildInputs` can be skipped if I just refer to ${pkgs} in the scripts?
   installPhase = ''
-    WORK_DIR=linkserver
-    mkdir -p $WORK_DIR && \
-    cp ${makeselfBinFile} LinkServer.deb.bin && \
-    chmod +x LinkServer.deb.bin && \
-    ./LinkServer.deb.bin --noexec --keep --target $WORK_DIR && \
-    bsdtar -x -f $WORK_DIR/LinkServer_${version}.x86_64.deb -C $WORK_DIR && \
+    WORK_DIR=work_dir
+    sh $src --noexec --keep --target $WORK_DIR && \
+    bsdtar -x -f $WORK_DIR/${filename} -C $WORK_DIR && \
     bsdtar -x -f $WORK_DIR/data.tar.gz -C $WORK_DIR && \
     mkdir -p $out/bin && \
     cp -r $WORK_DIR/lib $out && \
     cp -r $WORK_DIR/usr $out && \
-    echo "#!/usr/bin/env bash" >> $out/bin/${pname} && \
-    echo "PATH=${pkgs.usbutils}/bin:\$PATH" >> $out/bin/${pname} && \
-    echo "exec $out/usr/local/LinkServer_${version}/LinkServer \$@" >> $out/bin/${pname} && \
-    chmod 755 $out/bin/${pname}
+    makeWrapper $out/usr/local/LinkServer_${version}/LinkServer $out/bin/${pname} \
+      --prefix PATH : ${pkgs.usbutils}/bin \
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath ([ pkgs.xorg.libxcb ])}
   '';
-  fixupPhase = let
-    libPath = with pkgs;
-      lib.makeLibraryPath [
-        systemd
-        libz
-        libusb1
-        stdenv.cc.cc.lib
-      ];
-  in ''
-    patchelf --debug \
-      --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-      --set-rpath "${libPath}" \
-      $out/usr/local/LinkServer_${version}/LinkServer \
-      $out/usr/local/LinkServer_${version}/dist/LinkServer \
-      $out/usr/local/LinkServer_${version}/binaries/redlinkserv \
-      $out/usr/local/LinkServer_${version}/binaries/crt_emu_cm_redlink
-  '';
-  # Candidates for ELF-patching ?? :^)
-  # $out/usr/local/LinkServer_${version}/binaries/blhost
-  # $out/usr/local/LinkServer_${version}/binaries/cmtool_cm_redlink
-  # $out/usr/local/LinkServer_${version}/binaries/rltool
+  fixupPhase =
+    let
+      libPath =
+        with pkgs;
+        lib.makeLibraryPath [
+          systemd
+          libz
+          libusb1
+          stdenv.cc.cc.lib
+        ];
+    in
+    ''
+      patchelf --debug \
+        --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+        --set-rpath "${libPath}" \
+        $out/usr/local/LinkServer_${version}/LinkServer \
+        $out/usr/local/LinkServer_${version}/dist/LinkServer \
+        $out/usr/local/LinkServer_${version}/binaries/redlinkserv \
+        $out/usr/local/LinkServer_${version}/binaries/crt_emu_cm_redlink
+    '';
 }

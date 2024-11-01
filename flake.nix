@@ -1,21 +1,19 @@
 {
-  description = "LinkServer derivation builder";
+  description = "Kite Shield Nix packaged utilities";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = inputs @ {self, ...}: let
-    system = "x86_64-linux";
-    nixpkgs = import inputs.nixpkgs {inherit system;};
-    inherit (nixpkgs) pkgs;
-  in {
-    formatter.${system} = pkgs.alejandra;
-    lib.mkLinkServerDerivation = {
-      makeselfBinFile,
-      version,
-    }:
-      pkgs.callPackage ./linkserver.nix {inherit makeselfBinFile version;};
-    defaultTemplate = {
-      path = ./template;
-      description = "Flake based nix package with placeholders";
+  outputs =
+    inputs@{ self, ... }:
+    let
+      system = "x86_64-linux";
+      nixpkgs = import inputs.nixpkgs { inherit system; };
+      inherit (nixpkgs) pkgs;
+    in
+    {
+      formatter.${system} = pkgs.nixfmt-rfc-style;
+      packages.${system} = {
+          linkserver = pkgs.callPackage ./linkserver.nix { };
+          mcuxpresso-config-tools = pkgs.callPackage ./mcuxpresso-config-tools.nix { };
+      };
     };
-  };
 }
