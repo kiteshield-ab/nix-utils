@@ -9,7 +9,6 @@
 #  gtk,
   libXtst,
   libsecret,
-  webkitgtk_4_0,
   ...
 }:
 let
@@ -50,7 +49,6 @@ stdenv.mkDerivation rec {
             libXtst
             libsecret
           ]
-          ++ lib.optional (webkitgtk_4_0 != null) webkitgtk_4_0
         )
       } \
       --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules" \
