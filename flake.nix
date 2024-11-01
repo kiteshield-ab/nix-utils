@@ -1,5 +1,5 @@
 {
-  description = "Kite Shield Nix packaged utilities";
+  description = "Kite Shield AB // Nix packaged dev-utilities";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs =
