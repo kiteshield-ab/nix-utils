@@ -29,8 +29,7 @@ stdenv.mkDerivation rec {
     makeWrapper
     libarchive
   ];
-  installPhase =
-  ''
+  installPhase = ''
     WORK_DIR=work_dir
     sh $src --noexec --keep --target $WORK_DIR && \
     bsdtar -x -f $WORK_DIR/${filename} -C $WORK_DIR && \
@@ -41,13 +40,11 @@ stdenv.mkDerivation rec {
     cp -r $WORK_DIR/usr $out && \
     makeWrapper ${binNxpPrefix}/bin/tools $out/bin/${pname} \
       --prefix LD_LIBRARY_PATH : ${
-        lib.makeLibraryPath (
-          [
-            glib
-            libXtst
-            libsecret
-          ]
-        )
+        lib.makeLibraryPath ([
+          glib
+          libXtst
+          libsecret
+        ])
       } \
       --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules" \
       --prefix XDG_DATA_DIRS : "$GSETTINGS_SCHEMAS_PATH" \
