@@ -6,7 +6,6 @@
   glib-networking,
   jdk17,
   glib,
-#  gtk,
   libXtst,
   libsecret,
   ...
@@ -45,7 +44,6 @@ stdenv.mkDerivation rec {
         lib.makeLibraryPath (
           [
             glib
-#            gtk
             libXtst
             libsecret
           ]
