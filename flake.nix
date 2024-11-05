@@ -12,8 +12,8 @@
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
       packages.${system} = {
-        linkserver = pkgs.callPackage ./linkserver.nix { };
-        mcuxpresso-config-tools = pkgs.callPackage ./mcuxpresso-config-tools.nix { };
+        linkserver = pkgs.callPackage ./packages/linkserver.nix { };
+        mcuxpresso-config-tools = pkgs.callPackage ./packages/mcuxpresso-config-tools.nix { };
       };
     };
 }
