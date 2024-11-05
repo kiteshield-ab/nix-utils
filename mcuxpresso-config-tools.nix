@@ -1,13 +1,21 @@
 {
-  lib,
-  pkgs,
-  stdenv,
-  requireFile,
-  glib-networking,
-  jdk17,
+  fontconfig,
+  freetype,
   glib,
-  libXtst,
+  glib-networking,
+  gsettings-desktop-schemas,
+  gtk3,
+  jdk,
+  jdk17,
+  lib,
   libsecret,
+  libX11,
+  libXrender,
+  libXtst,
+  pkgs,
+  requireFile,
+  stdenv,
+  zlib,
   ...
 }:
 let
@@ -28,6 +36,16 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = with pkgs; [
     makeWrapper
     libarchive
+  ];
+  buildInputs = [
+    fontconfig
+    freetype
+    gsettings-desktop-schemas
+    gtk3
+    jdk
+    libX11
+    libXrender
+    zlib
   ];
   installPhase = ''
     WORK_DIR=work_dir
