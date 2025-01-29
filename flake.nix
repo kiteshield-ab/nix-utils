@@ -20,6 +20,7 @@
         sigrok-cli = pkgs.sigrok-cli;
         linkserver = pkgs.callPackage ./packages/linkserver.nix { };
         mcuxpresso-config-tools = pkgs.callPackage ./packages/mcuxpresso-config-tools.nix { };
+        mcuxpresso-ide = pkgs.callPackage ./packages/mcuxpresso-ide.nix { };
       };
       overlays = {
         libsigrok-dreamsourcelab-fw = import ./overlays/libsigrok-dreamsourcelab-fw.nix;
