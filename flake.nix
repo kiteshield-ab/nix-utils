@@ -18,6 +18,7 @@
       formatter.${system} = pkgs.nixfmt-rfc-style;
       packages.${system} = {
         sigrok-cli = pkgs.sigrok-cli;
+        arm-compiler = pkgs.callPackage ./packages/arm-compiler.nix { };
         linkserver = pkgs.callPackage ./packages/linkserver.nix { };
         mcuxpresso-config-tools = pkgs.callPackage ./packages/mcuxpresso-config-tools.nix { };
         mcuxpresso-ide = pkgs.callPackage ./packages/mcuxpresso-ide.nix { };
