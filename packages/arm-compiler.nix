@@ -50,11 +50,11 @@ stdenv.mkDerivation rec {
         cat <<EOF > "$out/bin/$executable"
     #!/usr/bin/env bash
     # Try to defensively activate the non-commercial version of arm-compiler.
-    # This will create a license file cached in "$HOME/.armlm" directory.
+    # This will create a license file cached in "\$HOME/.armlm" directory.
     # Should be more-less a noop if activated already :TM:
     #
     $out/_bin/armlm activate --server https://mdk-preview.keil.arm.com --product KEMDK-COM0 &> /dev/null
-    eval $out/_bin/$executable \$@
+    exec $out/_bin/$executable "\$@"
     EOF
         chmod 755 "$out/bin/$executable" || exit 1
     done
