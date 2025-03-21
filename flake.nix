@@ -22,6 +22,8 @@
         linkserver = callPackage ./packages/linkserver.nix { };
         mcuxpresso-config-tools = callPackage ./packages/mcuxpresso-config-tools.nix { };
         mcuxpresso-ide = callPackage ./packages/mcuxpresso-ide.nix { };
+        # Rust utilities
+        form = callPackage ./packages/form.nix { };
       };
       overlays = {
         # Overlay for libsigrok library containing extra firmware
