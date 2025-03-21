@@ -24,6 +24,7 @@
         mcuxpresso-ide = callPackage ./packages/mcuxpresso-ide.nix { };
         # Rust utilities
         form = callPackage ./packages/form.nix { };
+        mdbook-wavedrom = callPackage ./packages/mdbook-wavedrom.nix { };
       };
       overlays = {
         # Overlay for libsigrok library containing extra firmware
