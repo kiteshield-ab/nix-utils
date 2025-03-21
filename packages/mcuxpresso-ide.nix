@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   inherit version;
   dontUnpack = true;
   src = requireFile {
-    url = "TODO";
+    url = "https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE";
     name = "${filename}.bin";
     sha256 = "1mcfql3w3m3ja641nn7h3igvz8ls3paq491brkfp9lnrd4w1df9l";
   };
