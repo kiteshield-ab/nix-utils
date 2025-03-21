@@ -16,14 +16,15 @@
     in
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
-      packages.${system} = {
-        sigrok-cli = pkgs.sigrok-cli;
-        arm-compiler = pkgs.callPackage ./packages/arm-compiler.nix { };
-        linkserver = pkgs.callPackage ./packages/linkserver.nix { };
-        mcuxpresso-config-tools = pkgs.callPackage ./packages/mcuxpresso-config-tools.nix { };
-        mcuxpresso-ide = pkgs.callPackage ./packages/mcuxpresso-ide.nix { };
+      packages.${system} = with pkgs; {
+        # Embedded development miscellaneous applications
+        arm-compiler = callPackage ./packages/arm-compiler.nix { };
+        linkserver = callPackage ./packages/linkserver.nix { };
+        mcuxpresso-config-tools = callPackage ./packages/mcuxpresso-config-tools.nix { };
+        mcuxpresso-ide = callPackage ./packages/mcuxpresso-ide.nix { };
       };
       overlays = {
+        # Overlay for libsigrok library containing extra firmware
         libsigrok-dreamsourcelab-fw = import ./overlays/libsigrok-dreamsourcelab-fw.nix;
       };
     };
