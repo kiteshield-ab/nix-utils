@@ -23,6 +23,7 @@
         mcuxpresso-config-tools = callPackage ./packages/mcuxpresso-config-tools.nix { };
         mcuxpresso-ide = callPackage ./packages/mcuxpresso-ide.nix { };
         # Rust utilities
+        chiptool = callPackage ./packages/chiptool.nix { };
         form = callPackage ./packages/form.nix { };
         mdbook-wavedrom = callPackage ./packages/mdbook-wavedrom.nix { };
       };
