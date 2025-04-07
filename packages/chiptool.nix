@@ -5,18 +5,18 @@
 }:
 
 let
-  forkOwner = "kiteshield-ab";
-  tagInFork = "2025-03-12";
+  forkOwner = "embassy-rs";
+  rev = "d771c7bd86e0da146a942150aa6d2901dac6399b";
 in
 rustPlatform.buildRustPackage rec {
   pname = "chiptool";
-  version = "${forkOwner}-${tagInFork}";
+  version = "${forkOwner}-${rev}";
 
   src = fetchFromGitHub {
     owner = forkOwner;
     repo = pname;
-    rev = "refs/tags/${tagInFork}";
-    hash = "sha256-wip0SoN872DIMnl7TONnTHYzPe3JI1N1BjykJCmA9Mc=";
+    rev = "${rev}";
+    hash = "sha256-vcU6VNkKTeKP3cNSHxTg1/CA1ua1OuNlkzcNEttFGxw=";
   };
 
   # Nix's Rust platform does not support git dependencies in lock files.
@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = ./chiptool/Cargo.lock;
     outputHashes = {
-      "svd-parser-0.14.7" = "sha256-NQfLXojKqmug/CnJFwPvMXPNGEcWmHKG62XJ+wgyzro=";
+      "svd-parser-0.14.5" = "sha256-r78UZfulqPBegBc5/fOkgGGtv5AN2FjZFVg7g8ii5Qc=";
     };
   };
 
