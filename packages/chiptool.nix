@@ -6,7 +6,7 @@
 
 let
   forkOwner = "embassy-rs";
-  rev = "d771c7bd86e0da146a942150aa6d2901dac6399b";
+  rev = "23011236c00a0b97edb2230b9f990b6c1b48a508";
 in
 rustPlatform.buildRustPackage rec {
   pname = "chiptool";
@@ -16,7 +16,7 @@ rustPlatform.buildRustPackage rec {
     owner = forkOwner;
     repo = pname;
     rev = "${rev}";
-    hash = "sha256-vcU6VNkKTeKP3cNSHxTg1/CA1ua1OuNlkzcNEttFGxw=";
+    hash = "sha256-bfxeLOBx9ipcyEg8M7ay1yZlLApnYTLQGf0CFh0r9Pw=";
   };
 
   # Nix's Rust platform does not support git dependencies in lock files.
