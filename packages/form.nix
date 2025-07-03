@@ -6,14 +6,14 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "form";
-  version = "0.12.1";
+  version = "0.13.0";
 
   useFetchCargoVendor = true;
   src = fetchCrate {
     inherit pname version;
-    hash = "sha256-QwiYNmL5oncCw5oEygueyaaudBhydbtYhlpX+hA25zc=";
+    hash = "sha256-7+5HEyP7480UM5dydavoiclX3YTvW46V8r+Vpqt4xWk=";
   };
-  cargoHash = "sha256-DQSu4UhDF/Lxj12/vjZ6bCPyZpeceL9+5c/s9Gtou08=";
+  cargoHash = "sha256-ItNBQKye1GD01KFBubMLxksv8OCWIxya/LlZ9g6Jdg8=";
 
   meta = with lib; {
     description = "A small script to move inline modules into the proper directory structure";
