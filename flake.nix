@@ -26,7 +26,7 @@
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f (pkgsFor system));
     in
     {
-      formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt-rfc-style);
+      formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt-tree);
       packages = forAllSystems (
         { pkgs, ... }:
         with pkgs;
