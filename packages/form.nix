@@ -8,7 +8,6 @@ rustPlatform.buildRustPackage rec {
   pname = "form";
   version = "0.13.0";
 
-  useFetchCargoVendor = true;
   src = fetchCrate {
     inherit pname version;
     hash = "sha256-7+5HEyP7480UM5dydavoiclX3YTvW46V8r+Vpqt4xWk=";
