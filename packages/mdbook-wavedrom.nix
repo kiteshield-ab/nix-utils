@@ -8,7 +8,6 @@ rustPlatform.buildRustPackage rec {
   pname = "mdbook-wavedrom";
   version = "0.10.0";
 
-  useFetchCargoVendor = true;
   src = fetchCrate {
     inherit pname version;
     hash = "sha256-eGFDZQ71ofXeulsGdK6T8QUpgtEGbpqKIrbYKtFlUD0=";
