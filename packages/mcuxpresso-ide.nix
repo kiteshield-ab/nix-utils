@@ -20,8 +20,8 @@
 }:
 let
   filename = "mcuxpressoide-${version}.x86_64.deb";
-  version = "24.12.148";
-  binNxpPrefix = "$out/usr/local/mcuxpressoide-24.12.148/ide";
+  version = "25.6.136";
+  binNxpPrefix = "$out/usr/local/mcuxpressoide-25.6.136/ide";
   execName = "mcuxpressoide";
 in
 stdenv.mkDerivation rec {
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   src = requireFile {
     url = "https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE";
     name = "${filename}.bin";
-    sha256 = "1mcfql3w3m3ja641nn7h3igvz8ls3paq491brkfp9lnrd4w1df9l";
+    sha256 = "0sjrg0shcjyps3hri77c3id0k1iqkcgp5h8hkv7ssnnq56gcnl8g";
   };
   nativeBuildInputs = with pkgs; [
     makeWrapper
