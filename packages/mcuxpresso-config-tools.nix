@@ -20,7 +20,7 @@
 }:
 let
   filename = "mcuxpresso-config-tools-${version}_amd64.deb";
-  partialVersion = "v16.1";
+  partialVersion = "25.09";
   version = "${partialVersion}-1";
   binNxpPrefix = "$out/opt/nxp/MCUX_CFG_${partialVersion}";
 in
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   src = requireFile {
     url = "https://www.nxp.com/design/software/development-software/mcuxpresso-config-tools-pins-clocks-and-peripherals:MCUXpresso-Config-Tools";
     name = "${filename}.bin";
-    sha256 = "14kq575y8waxy5q5kl5j3i3ncwy44x2l7vysdd7qs1i0iaq8ypf2";
+    sha256 = "03lqhkmaxcqb421nx55gl9wa1p26q9naqs2bxs3rld7wf49a941p";
   };
   nativeBuildInputs = with pkgs; [
     makeWrapper
